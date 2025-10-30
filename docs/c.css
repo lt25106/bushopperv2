@@ -1,0 +1,184 @@
+@font-face {
+  font-family: 'LTAIdentity';
+  src: url('lta.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body,
+body#index > button,
+body#index > dialog,
+body#index > dialog > button,
+body#game > div#map,
+body#game > div#popup > span > button,
+body#game > div#popup > button {
+  border: none;
+}
+
+body#index > button,
+body#index > dialog > button,
+body#index > dialog > span,
+body#index > dialog > span > input,
+body#game > div#popup > span,
+body#game > div#popup > span > button,
+body#game > div#popup > span > input,
+body#game > div#popup > span > a > button,
+body#game > div#popup > button {
+  font-size: 1.75rem;
+}
+
+body#index button,
+body#index > dialog > span > input,
+body#game > div#popup > span > input,
+body#game > div#popup button {
+  border-radius: 9e9rem;
+}
+
+body,
+body#index > dialog,
+body#game > div#map,
+body#game > div#popup {
+  background-color: black;
+  text-align: center;
+}
+
+body,
+body#index > dialog,
+body#game > div#map,
+body#game > div#popup,
+body#players > div > table > tbody > tr > td > span,
+body#leaderboard > div > table > tbody > tr > td:first-child {
+  font-family: sans-serif;
+}
+
+body,
+body#index > dialog,
+body#game > div#map,
+body#game > div#popup > button {
+  color: white;
+}
+
+body#index > dialog > span,
+body#game > div#map > div.maplibregl-control-container,
+body#game > div#popup > button {
+  display: none;
+}
+
+body#index > button,
+body#index > dialog > button,
+body#game > div#popup > span button,
+body#game > div#popup > button {
+  margin: 0.125rem;
+  background-color: hsl(76, 59%, 53%);
+  transition: background-color 0.267s;
+}
+
+body#index > button:active,
+body#index > dialog > button:active,
+body#game > div#popup > span button:active,
+body#game > div#popup > button:active {
+  background-color: hsl(76, 59%, 33%);
+}
+
+body#game,
+body#game > div#map,
+body#game > div#popup > h1,
+body > div > h1 {
+  margin: 0;
+}
+
+body#game > div#popup > span > input,
+body#index > dialog > span > input,
+body#index > dialog > span  {
+  max-width: 85vw;
+}
+
+body#index > svg,
+body#game,
+body#game > div#map {
+  width: 100vw;
+  height: 100vh;
+}
+
+body#game > div#popup > h1,
+body#game > div#popup > span,
+body#game > div#popup > span > button,
+body#players > div > table > tbody > tr > td,
+body#leaderboard {
+  font-family: "LTAIdentity";
+}
+
+body#index > a {
+  float: left;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+body#index > svg,
+body#game > div#popup {
+  position: fixed;
+}
+
+body#game > div#popup {
+  z-index: 2;
+  bottom: -50%;
+  width: 100%;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  transition: bottom 0.3s;
+  max-height: 50vh;
+  overflow-y: scroll;
+  border-top: 0.125rem solid hsl(67, 0%, 28%);
+}
+
+body#game > div#popup > button {
+  background-color: hsl(256, 59%, 53%);
+}
+
+body#game > div#popup > button:active {
+  background-color: hsl(256, 59%, 33%)
+}
+
+body > div > table > tbody > tr > td {
+  border: 0.125rem solid hsl(67, 0%, 16.7%);
+}
+body > div > table {
+  border-collapse: collapse;
+  width: 99vw;
+}
+body > div > h1 {
+  margin-top: 0.67rem
+}
+
+body#index {
+  padding-top: calc(50vh - 5rem);
+  background-size: cover;
+}
+body#index > dialog {
+  border-radius: 2rem;
+}
+
+body#index > svg {
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+body#index > svg > circle {
+  animation: spin 2s infinite linear;
+  r: 467;
+  stroke: white;
+  cx: 500;
+  cy: 500;
+  stroke-width: 8;
+  stroke-dasharray: 733.5, 733.5;
+  stroke-linecap: round;
+}
+@keyframes spin {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 733.5;
+  }
+}

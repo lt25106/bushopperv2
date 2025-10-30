@@ -1,0 +1,12 @@
+{
+  "rules": {
+    ".read": true,
+    "leaderboard": {
+      "$busnums": {
+        "$name": {
+          ".write": "!data.exists() || data.child('distance').val() > newData.child('distance').val()"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="c.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BusHopper 2</title>
+</head>
+<body id="index">
+  <svg viewBox="0 0 1000 1000">
+    <circle/>
+  </svg>
+  <h1>BusHopper 2</h1>
+  <button onclick="document.querySelector('dialog').showModal()">Play ▶</button>
+  <dialog>
+    <h1>Choose stops</h1>
+    <button onclick="generatebuses()">Random ⚄</button><br>
+    <button onclick="showselected()">Selected ✓</button>
+    <br><br>
+    <span>
+      Start: <input list="startbusstops"><br>
+      <datalist id="startbusstops"></datalist>
+      End: <input list="endbusstops">
+      <datalist id="endbusstops"></datalist>
+    </span>
+  </dialog>
+  <script type="module" src="index.s.js"></script>
+</body>
+</html>
