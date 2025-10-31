@@ -1,20 +1,20 @@
-import{c as l,d as f,g as m,h as u,i as h}from"./chunk-GXLBMYCJ.js";l(h);var g=u();m(f(g,"leaderboard"),o=>{y.innerHTML="";let a=o.val(),s={};for(let[i,p]of Object.entries(a))for(let[t,n]of Object.entries(p))s[t]||(s[t]={}),s[t][i]=n;for(let[i,p]of Object.entries(s)){let t="";for(let[n,e]of Object.entries(p)){let b=[];for(let r=0;r<e.stops.length;r++)b.push(d(e.stops[r])),e.buses[r]&&b.push(e.buses[r]);let c=new Date(e.time);t+=`
+import"./chunk-FJBZMROU.js";import{E as f,H as p,K as b,L as u,M as g}from"./chunk-RDGRUNCC.js";f(g);var $=u(),y;b(p($,"users"),t=>{y=t.val()});b(p($,"leaderboard"),t=>{h.innerHTML="";let n=t.val(),e={};for(let[l,c]of Object.entries(n))for(let[s,r]of Object.entries(c))e[s]||(e[s]={}),e[s][l]=r;for(let[l,c]of Object.entries(e)){let s="";for(let[r,o]of Object.entries(c)){let d=[];for(let a=0;a<o.stops.length;a++)d.push(i(o.stops[a])),o.buses[a]&&d.push(o.buses[a]);let m=new Date(o.time);s+=`
       <tr>
         <td>
-          ${d(n.split(" \u2192 ")[0])} \u2192 ${d(n.split(" \u2192 ")[1])}<br>
-          <span>
-            ${(e.distance/1e3).toFixed(1)}km<br>
-            ${c.toLocaleDateString("en-GB")}<br>
-            ${c.toLocaleTimeString("en-GB")}
-          </span>
+          <span onclick="startgame('${r}')">        
+            ${i(r.split(" \u2192 ")[0])} \u2192 ${i(r.split(" \u2192 ")[1])}
+          </span><br>
+          ${(o.distance/1e3).toFixed(1)}km<br>
+          ${m.toLocaleDateString("en-GB")}<br>
+          ${m.toLocaleTimeString("en-GB")}
         </td>
-        <td>${b.join(" \u2192 ")}</td>
+        <td>${d.join(" \u2192 ")}</td>
       </tr>
-      `}y.innerHTML+=`
-    <h1>${i}</h1>
+      `}h.innerHTML+=`
+    <h1>${y[l].name}</h1>
     <table>
       <tbody>
-        ${t}
+        ${s}
       </tbody>
     </table>
-    `}});var $=await fetch("https://data.busrouter.sg/v1/stops.min.geojson").then(o=>o.json()),y=document.querySelector("body > div");function d(o){return $.features.find(a=>a.id==o).properties.name}
+    `}});var w=await fetch("https://data.busrouter.sg/v1/stops.min.geojson").then(t=>t.json()),h=document.querySelector("body > div");function i(t){return w.features.find(n=>n.id==t).properties.name}function j(t){let n=i(t.split(" \u2192 ")[0])+` (${t.split(" \u2192 ")[0]})`,e=i(t.split(" \u2192 ")[1])+` (${t.split(" \u2192 ")[1]})`;localStorage.setItem("busstops",JSON.stringify([n,e])),window.location.href="game.html"}window.startgame=j;

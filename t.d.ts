@@ -43,19 +43,34 @@ type helperpolyline = {
   polylineSourceId: string
 }
 type hsl = `hsl(${string},${string}%,${string}%)`
-type leaderboard = {
-  [route: string]: {
-    [name: string]: game
-  }
-}
 type game = {
   buses: string[]
   distance: number
   stops: string[]
   time: number
 }
+type leaderboard = {
+  [route: string]: {
+    [uid: string]: game
+  }
+}
 type byplayer = {
   [player: string]: {
     [routes: string]: game
+  }
+}
+type bydate = {
+  [date: string]: {
+    buses: string[]
+    distance: number
+    stops: string[]
+    uid: string
+    route: string
+    time: number
+  }[]
+}
+type allusers = {
+  [uid: string]: {
+    name: string
   }
 }

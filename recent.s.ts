@@ -14,29 +14,47 @@ onValue(ref(db,"users"), snapshot => {
 onValue(ref(db,"leaderboard"), snapshot => {
   div.innerHTML = ""
   const leaderboard: leaderboard = snapshot.val()
+  const bydate: bydate = {}
   for (const [route,attempts] of Object.entries(leaderboard)) {
+    for (const [uid,routepath] of Object.entries(attempts)) {
+      const date = new Date(routepath.time).toLocaleDateString("en-GB")
+      if (!bydate[date]) bydate[date] = []
+      bydate[date].push({...routepath, uid, route})
+    }
+  }
+  for (const [date,routes] of Object.entries(bydate)) {
     let table = ""
-    for (const [uid,path] of Object.entries(attempts)) {
-      const routeshown: string[] = []
-      for (let i = 0; i < path.stops.length; i++) {
-        routeshown.push(idtoname(path.stops[i]))
-        if (path.buses[i]) routeshown.push(path.buses[i])
+    routes.forEach(route => {
+      const routeshown = []
+      for (let i = 0; i < route.stops.length; i++) {
+        routeshown.push(idtoname(route.stops[i]))
+        if (route.buses[i]) routeshown.push(route.buses[i])
       }
-    const datetime = new Date(path.time)
+
+      const date = new Date(route.time)
       table += `
       <tr>
-        <td>${allusers[uid].name}<br>${(path.distance/1000).toFixed(1)}km<br>${datetime.toLocaleDateString("en-GB")}<br>${datetime.toLocaleTimeString("en-GB")}</td>
+        <td>
+          <span onclick="startgame('${route.route}')">        
+            ${idtoname(route.route.split(" → ")[0])} → ${idtoname(route.route.split(" → ")[1])}
+          </span><br><br>
+          <details>
+            <summary>${allusers[route.uid].name}</summary>
+            ${(route.distance/1000).toFixed(1)}km<br>
+            ${date.toLocaleDateString("en-GB")}<br>
+            ${date.toLocaleTimeString("en-GB")}
+          </details>
+        </td>
         <td>${routeshown.join(" → ")}</td>
       </tr>
       `
-    }
-  
+    })
     div.innerHTML += `
-    <h1 onclick="startgame('${route}')">${idtoname(route.split(" → ")[0])} → ${idtoname(route.split(" → ")[1])}</h1>
+    <h1>${date}</h1>
     <table>
       <tbody>
         ${table}
-      </tbody>
+      <tbody>
     </table>
     `
   }

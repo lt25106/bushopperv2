@@ -1,0 +1,1 @@
+var t=document.querySelector("input"),l=document.querySelector("body > div");t?.addEventListener("input",o=>{l.querySelectorAll("h1").forEach(e=>{let n=e.textContent.toUpperCase().includes(t.value.toUpperCase());e.style.display=e.nextElementSibling.style.display=n?"block":"none"})});

@@ -16,6 +16,7 @@ body#game > div#popup > button {
   border: none;
 }
 
+body#index > nav,
 body#index > button,
 body#index > dialog > button,
 body#index > dialog > span,
@@ -28,6 +29,7 @@ body#game > div#popup > button {
   font-size: 1.75rem;
 }
 
+body > input[placeholder="🔍"],
 body#index button,
 body#index > dialog > span > input,
 body#game > div#popup > span > input,
@@ -47,7 +49,6 @@ body,
 body#index > dialog,
 body#game > div#map,
 body#game > div#popup,
-body#players > div > table > tbody > tr > td > span,
 body#leaderboard > div > table > tbody > tr > td:first-child {
   font-family: sans-serif;
 }
@@ -72,6 +73,12 @@ body#game > div#popup > button {
   margin: 0.125rem;
   background-color: hsl(76, 59%, 53%);
   transition: background-color 0.267s;
+}
+
+body#leaderboard > div > h1,
+body#players > div > table > tbody > tr > td > span,
+body#recent > div > table > tbody > tr > td > span {
+  color: hsl(76, 59%, 53%)
 }
 
 body#index > button:active,
@@ -104,15 +111,18 @@ body#game > div#map {
 body#game > div#popup > h1,
 body#game > div#popup > span,
 body#game > div#popup > span > button,
-body#players > div > table > tbody > tr > td,
+body#players > div > table > tbody > tr > td:last-child,
+body#players > div > table > tbody > tr > td > span,
+body#recent > div > table > tbody > tr > td:last-child,
+body#recent > div > table > tbody > tr > td > span,
 body#leaderboard {
   font-family: "LTAIdentity";
 }
 
-body#index > a {
-  float: left;
-  font-size: 1.5rem;
+body > input[placeholder="🔍"],
+body#index > nav > a {
   text-decoration: none;
+  filter: grayscale();
 }
 
 body#index > svg,
@@ -140,6 +150,7 @@ body#game > div#popup > button:active {
   background-color: hsl(256, 59%, 33%)
 }
 
+body#index > dialog,
 body > div > table > tbody > tr > td {
   border: 0.125rem solid hsl(67, 0%, 16.7%);
 }
@@ -151,12 +162,11 @@ body > div > h1 {
   margin-top: 0.67rem
 }
 
-body#index {
-  padding-top: calc(50vh - 5rem);
-  background-size: cover;
-}
 body#index > dialog {
   border-radius: 2rem;
+}
+body#index > nav {
+  margin-bottom: calc(50vh - 6rem);
 }
 
 body#index > svg {
@@ -164,21 +174,42 @@ body#index > svg {
   left: 0;
   z-index: -1;
 }
-body#index > svg > circle {
-  animation: spin 2s infinite linear;
-  r: 467;
-  stroke: white;
+body#index > svg > circle#spin1,
+body#index > svg > circle#spin2 {
+  stroke: hsl(67, 0%, 28%);
   cx: 500;
   cy: 500;
-  stroke-width: 8;
-  stroke-dasharray: 733.5, 733.5;
+  stroke-width: 20;
+  stroke-dasharray: 6.7 993.3;
+  stroke-linecap: round;
+  transform-origin: center;
+  fill: none;
+}
+
+body#index > svg > circle#spin1 {
+  r: 477;
+  animation: spin 6.9s infinite linear;
+}
+
+body#index > svg > circle#spin2 {
+  r: 457 ;
+  animation: spin 6.7s infinite linear reverse;
+}
+
+body#index > svg > circle#nospin {
+  r: 467;
+  stroke: hsl(67, 0%, 16.7%);
+  stroke-width: 50;
+  cx: 500;
+  cy: 500;
   stroke-linecap: round;
 }
+
 @keyframes spin {
   from {
-    stroke-dashoffset: 0;
+    rotate: 0;
   }
   to {
-    stroke-dashoffset: 733.5;
+    rotate: 360deg;
   }
 }

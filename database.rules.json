@@ -3,9 +3,14 @@
     ".read": true,
     "leaderboard": {
       "$busnums": {
-        "$name": {
-          ".write": "!data.exists() || data.child('distance').val() > newData.child('distance').val()"
+        "$uid": {
+          ".write": "(!data.exists() || data.child('distance').val() > newData.child('distance').val()) && auth.uid == $uid"
         }
+      }
+    },
+    "users": {
+      "$uid": {
+        ".write": "auth.uid == $uid && !data.child('name').exists()"
       }
     }
   }

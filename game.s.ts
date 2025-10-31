@@ -1,6 +1,7 @@
 import { Map, MapStyle, config, Marker, helpers, GeoJSONSource, LngLat } from "@maptiler/sdk"
 import { initializeApp } from "firebase/app"
 import { getDatabase, set, ref, get } from "firebase/database"
+import { getAuth, signInAnonymously, UserCredential } from "firebase/auth"
 import { firebaseConfig } from "./firebaseconfig.c.js"
 
 const [routes, services, stops]: [routes, services, stops] = await Promise.all([
@@ -13,6 +14,9 @@ initializeApp(firebaseConfig)
 const db = getDatabase()
 
 config.apiKey = 'iBKpu3YshpPXQzg7ZH1Y'
+
+const auth = getAuth()
+
 const map = new Map({
   container: 'map', // container id
   style: MapStyle.DATAVIZ.DARK,
@@ -27,7 +31,6 @@ map.on("ready", e => {
 const popup = document.getElementById("popup") as HTMLDivElement
 const h1 = popup.querySelector("h1") as HTMLHeadingElement
 const span = popup.querySelector("span") as HTMLSpanElement
-const dialog = document.querySelector("dialog") as HTMLDialogElement
 const confirm = popup.querySelector("button")!
 
 const currentbustops: Busstop[] = []
@@ -123,7 +126,6 @@ class Busroute {
     if (fullbusroute.length == 1 || services[busnum].routes[0].includes(allowedmarkers.at(-1)!.id)) this.lnglatpoints = fullbusroute[0].geometry.coordinates
     else this.lnglatpoints = fullbusroute[1].geometry.coordinates
     this.stops = services[busnum].routes
-
   }
 
   async addroute() {
@@ -208,7 +210,8 @@ function getstopidandname(stringfromlocal: string): [string,hsl,string] {
 function confirmbus() {
   popup.style.bottom = `-${popup.scrollHeight}px`
   allowedbusroutes.push(currentbusroute!)
-  const direction = (currentbusroute?.stops.length == 1 || currentbusroute?.stops[0].find(stop => stop == currentbustops[0].id)) ? 0 : 1
+  const currentbusstop = allowedmarkers.at(-1) == endbusstop ? currentbustops[0] : allowedmarkers.at(-1)
+  const direction = (currentbusroute?.stops.length == 1 || currentbusroute?.stops[0].find(stop => stop == currentbusstop?.id)) ? 0 : 1
 
   currentbusroute?.stops[direction].forEach(busstop => {
     if (busstop == startbusstop.id) {
@@ -225,6 +228,8 @@ function confirmbus() {
     new Busstop(busstop,"hsl(256, 59%, 53%)").addmarker()
   })
 }
+
+let user: UserCredential
 
 function win() {
   const routeshown: string[] = []
@@ -243,10 +248,12 @@ function win() {
   span.textContent = routeshown.join(" → ")
   confirm.textContent = "Add to Leaderboard"
   confirm.onclick = async () => {
-    const name = localStorage.getItem("name") || span.querySelector("input")?.value
-    if (name) {
-      if (!localStorage.getItem("name")) localStorage.setItem("name", span.querySelector("input")!.value)
-      await writetodb(name)
+    user = await signInAnonymously(auth)
+    const firebasename = (await get(ref(db,`users/${user.user.uid}/name`))).val()
+    const spanvalue = span.querySelector("input")?.value
+    if (spanvalue || firebasename) {
+      if (!firebasename) await set(ref(db,`users/${user.user.uid}/name`),spanvalue)
+      await writetodb()
       return
     }
     h1.textContent = "Set name:"
@@ -256,9 +263,9 @@ function win() {
   cleanbusstops()
 }
 
-async function writetodb(name: string) {
+async function writetodb() {
   const existingpath = await get(ref(db,`leaderboard/${endbusstop.id} → ${startbusstop.id}`))
-  const finalpath = existingpath 
+  const finalpath = existingpath?.val()
   ? `${endbusstop.id} → ${startbusstop.id}` 
   : `${startbusstop.id} → ${endbusstop.id}`
 
@@ -275,7 +282,7 @@ async function writetodb(name: string) {
   }
 
   try {
-    await set(ref(db,`leaderboard/${finalpath}/${name}`),data)
+    await set(ref(db,`leaderboard/${finalpath}/${user.user.uid}`),data)
     h1.textContent = "Success!"
   } catch (error) {
     console.log(error)
