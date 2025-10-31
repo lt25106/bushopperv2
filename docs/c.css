@@ -72,6 +72,7 @@ body#game > div#popup > span button,
 body#game > div#popup > button {
   margin: 0.125rem;
   background-color: hsl(76, 59%, 53%);
+  color: black;
   transition: background-color 0.267s;
 }
 
