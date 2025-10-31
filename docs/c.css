@@ -96,6 +96,11 @@ body > div > h1 {
   margin: 0;
 }
 
+body#game > div#map {
+  position: relative;
+  bottom: 3rem;
+}
+
 body#game > div#popup > span > input,
 body#index > dialog > span > input,
 body#index > dialog > span  {
@@ -168,6 +173,14 @@ body#index > dialog {
 }
 body#index > nav {
   margin-bottom: calc(50vh - 6rem);
+}
+
+img[src="bushopper.svg"] {
+  height: 3rem;
+  width: 3rem;
+  float: left;
+  z-index: 3;
+  position: relative;
 }
 
 body#index > svg {
