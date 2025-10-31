@@ -150,6 +150,7 @@ body#game > div#popup {
 
 body#game > div#popup > button {
   background-color: hsl(256, 59%, 53%);
+  color: white;
 }
 
 body#game > div#popup > button:active {

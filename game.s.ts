@@ -208,6 +208,7 @@ function getstopidandname(stringfromlocal: string): [string,hsl,string] {
 }
 
 function confirmbus() {
+  confirm.style.display = "none"
   popup.style.bottom = `-${popup.scrollHeight}px`
   allowedbusroutes.push(currentbusroute!)
   const currentbusstop = allowedmarkers.at(-1) == endbusstop ? currentbustops[0] : allowedmarkers.at(-1)
