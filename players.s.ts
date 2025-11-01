@@ -48,7 +48,7 @@ onValue(ref(db,"leaderboard"), snapshot => {
       `
     }
     div.innerHTML += `
-    <h1>${allusers[uid].name.replace(/[<>]/g, "")}</h1>
+    <h1>${allusers[uid].name.replace(/[<]/g, "&lt;").replace(/[>]/g, "&gt;")}</h1>
     <table>
       <tbody>
         ${table}

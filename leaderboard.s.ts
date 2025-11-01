@@ -27,7 +27,7 @@ onValue(ref(db,"leaderboard"), snapshot => {
       <tr>
         <td>
           <details>
-            <summary>${allusers[uid].name.replace(/[<>]/g, "")}</summary>
+            <summary>${allusers[uid].name.replace(/[<]/g, "&lt;").replace(/[>]/g, "&gt;")}</summary>
             ${(path.distance/1000).toFixed(1)}km<br>
             ${datetime.toLocaleDateString("en-GB")}<br>
             ${datetime.toLocaleTimeString("en-GB")}

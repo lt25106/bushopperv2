@@ -1,14 +1,14 @@
-import"./chunk-FJBZMROU.js";import{E as b,H as c,K as m,L as f,M as g}from"./chunk-RDGRUNCC.js";b(g);var h=f(),$;m(c(h,"users"),e=>{$=e.val()});m(c(h,"leaderboard"),e=>{u.innerHTML="";let o=e.val(),a={};for(let[l,d]of Object.entries(o))for(let[r,t]of Object.entries(d)){let s=new Date(t.time).toLocaleDateString("en-GB");a[s]||(a[s]=[]),a[s].push({...t,uid:r,route:l})}for(let[l,d]of Object.entries(a)){let r="";d.forEach(t=>{let s=[];for(let n=0;n<t.stops.length;n++)s.push(i(t.stops[n])),t.buses[n]&&s.push(t.buses[n]);let p=new Date(t.time);r+=`
+import"./chunk-FJBZMROU.js";import{E as b,H as c,K as p,L as f,M as g}from"./chunk-RDGRUNCC.js";b(g);var h=f(),$;p(c(h,"users"),e=>{$=e.val()});p(c(h,"leaderboard"),e=>{u.innerHTML="";let o=e.val(),a={};for(let[l,d]of Object.entries(o))for(let[r,t]of Object.entries(d)){let s=new Date(t.time).toLocaleDateString("en-GB");a[s]||(a[s]=[]),a[s].push({...t,uid:r,route:l})}for(let[l,d]of Object.entries(a)){let r="";d.forEach(t=>{let s=[];for(let n=0;n<t.stops.length;n++)s.push(i(t.stops[n])),t.buses[n]&&s.push(t.buses[n]);let m=new Date(t.time);r+=`
       <tr>
         <td>
           <span onclick="startgame('${t.route}')">        
             ${i(t.route.split(" \u2192 ")[0])} \u2192 ${i(t.route.split(" \u2192 ")[1])}
           </span><br>
           <details>
-            <summary>${$[t.uid].name.replace(/[<>]/g,"")}</summary>
+            <summary>${$[t.uid].name.replace(/[<]/g,"&lt;").replace(/[>]/g,"&gt;")}</summary>
             ${(t.distance/1e3).toFixed(1)}km<br>
-            ${p.toLocaleDateString("en-GB")}<br>
-            ${p.toLocaleTimeString("en-GB")}
+            ${m.toLocaleDateString("en-GB")}<br>
+            ${m.toLocaleTimeString("en-GB")}
           </details>
         </td>
         <td>${s.join(" \u2192 ")}</td>
