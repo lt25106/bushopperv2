@@ -82,6 +82,7 @@ class Busstop {
           busroute.addroute()
           if (!allowedbusroutes.includes(currentbusroute!)) currentbusroute?.removeroute()
           confirm.style.display = "inline"
+          currentbusroute = busroute
           return
         }
         currentbusroute = busroute
