@@ -34,7 +34,7 @@ onValue(ref(db,"leaderboard"), snapshot => {
       table += `
       <tr>
         <td>
-          <span onclick="startgame('${name.replace(/[<>]/g, "")}')">        
+          <span onclick="startgame('${name}')">        
             ${busidtoname(name.split(" → ")[0])} → ${busidtoname(name.split(" → ")[1])}
           </span><br>
           <details>
@@ -48,7 +48,7 @@ onValue(ref(db,"leaderboard"), snapshot => {
       `
     }
     div.innerHTML += `
-    <h1>${allusers[uid].name}</h1>
+    <h1>${allusers[uid].name.replace(/[<>]/g, "")}</h1>
     <table>
       <tbody>
         ${table}
