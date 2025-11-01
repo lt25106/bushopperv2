@@ -114,6 +114,12 @@ body#game > div#map {
   height: 100vh;
 }
 
+body > div > table,
+body > div > table > tbody,
+body > div > table > tbody > tr {
+  width: 98vw !important;
+}
+
 body#game > div#popup > h1,
 body#game > div#popup > span,
 body#game > div#popup > span > button,
