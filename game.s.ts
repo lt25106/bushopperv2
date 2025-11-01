@@ -4,6 +4,8 @@ import { getDatabase, set, ref, get } from "firebase/database"
 import { getAuth, signInAnonymously, UserCredential } from "firebase/auth"
 import { firebaseConfig } from "./firebaseconfig.c.js"
 
+const mobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)
+
 const [routes, services, stops]: [routes, services, stops] = await Promise.all([
   fetch("https://data.busrouter.sg/v1/routes.min.geojson").then(res => res.json()),
   fetch("https://data.busrouter.sg/v1/services.min.json").then(res => res.json()),
@@ -21,7 +23,7 @@ const map = new Map({
   container: 'map', // container id
   style: MapStyle.DATAVIZ.DARK,
   center: [103.8198, 1.3521], // starting position [lng, lat]
-  zoom: 9 // starting zoom
+  zoom: mobile ? 9 : 11 // starting zoom
 })
 
 map.on("ready", e => {
@@ -73,12 +75,26 @@ class Busstop {
     popup.style.bottom = "0"
     cleanbusstops()
     span.querySelectorAll("button").forEach(button => {
+      let busroute: Busroute
       button.addEventListener("click", e => {
-        const busroute = new Busroute(button.textContent)
-        busroute.addroute()
-        if (!allowedbusroutes.includes(currentbusroute!)) currentbusroute?.removeroute()
+        if (mobile) {
+          busroute = new Busroute(button.textContent)
+          busroute.addroute()
+          if (!allowedbusroutes.includes(currentbusroute!)) currentbusroute?.removeroute()
+          confirm.style.display = "inline"
+          return
+        }
         currentbusroute = busroute
-        confirm.style.display = "inline"
+        confirmbus()
+      })
+      if (mobile) return
+      button.addEventListener("mouseover", e => {
+        busroute = new Busroute(button.textContent)
+        busroute.addroute()
+      })
+      button.addEventListener("mouseout", e => {
+        if (allowedbusroutes.includes(busroute!)) return
+        busroute.removeroute()
       })
     })
 
