@@ -37,9 +37,11 @@ onValue(ref(db,"leaderboard"), snapshot => {
           <span onclick="startgame('${name}')">        
             ${busidtoname(name.split(" → ")[0])} → ${busidtoname(name.split(" → ")[1])}
           </span><br>
-          ${(route.distance/1000).toFixed(1)}km<br>
-          ${datetime.toLocaleDateString("en-GB")}<br>
-          ${datetime.toLocaleTimeString("en-GB")}
+          <details>
+            <summary>${datetime.toLocaleDateString("en-GB")}</summary>
+            ${(route.distance/1000).toFixed(1)}km<br>
+            ${datetime.toLocaleTimeString("en-GB")}
+          </details>
         </td>
         <td>${routeshown.join(" → ")}</td>
       </tr>

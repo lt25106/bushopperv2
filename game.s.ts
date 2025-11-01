@@ -247,6 +247,7 @@ function win() {
   h1.style.fontWeight = "lighter"
   h1.textContent = "You win! Your route: "
   span.textContent = routeshown.join(" → ")
+  confirm.style.display = "inline"
   confirm.textContent = "Add to Leaderboard"
   confirm.onclick = async () => {
     user = await signInAnonymously(auth)

@@ -37,7 +37,7 @@ onValue(ref(db,"leaderboard"), snapshot => {
         <td>
           <span onclick="startgame('${route.route}')">        
             ${idtoname(route.route.split(" → ")[0])} → ${idtoname(route.route.split(" → ")[1])}
-          </span><br><br>
+          </span><br>
           <details>
             <summary>${allusers[route.uid].name}</summary>
             ${(route.distance/1000).toFixed(1)}km<br>

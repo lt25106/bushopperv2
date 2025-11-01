@@ -3,7 +3,7 @@ import"./chunk-FJBZMROU.js";import{E as b,H as c,K as m,L as f,M as g}from"./chu
         <td>
           <span onclick="startgame('${t.route}')">        
             ${i(t.route.split(" \u2192 ")[0])} \u2192 ${i(t.route.split(" \u2192 ")[1])}
-          </span><br><br>
+          </span><br>
           <details>
             <summary>${$[t.uid].name}</summary>
             ${(t.distance/1e3).toFixed(1)}km<br>

@@ -25,7 +25,14 @@ onValue(ref(db,"leaderboard"), snapshot => {
     const datetime = new Date(path.time)
       table += `
       <tr>
-        <td>${allusers[uid].name}<br>${(path.distance/1000).toFixed(1)}km<br>${datetime.toLocaleDateString("en-GB")}<br>${datetime.toLocaleTimeString("en-GB")}</td>
+        <td>
+          <details>
+            <summary>${allusers[uid].name}</summary>
+            ${(path.distance/1000).toFixed(1)}km<br>
+            ${datetime.toLocaleDateString("en-GB")}<br>
+            ${datetime.toLocaleTimeString("en-GB")}
+          </details>
+        </td>
         <td>${routeshown.join(" → ")}</td>
       </tr>
       `
