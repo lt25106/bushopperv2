@@ -39,7 +39,7 @@ onValue(ref(db,"leaderboard"), snapshot => {
             ${idtoname(route.route.split(" → ")[0])} → ${idtoname(route.route.split(" → ")[1])}
           </span><br>
           <details>
-            <summary>${allusers[route.uid].name}</summary>
+            <summary>${allusers[route.uid].name.replace(/[<>]/g, "")}</summary>
             ${(route.distance/1000).toFixed(1)}km<br>
             ${date.toLocaleDateString("en-GB")}<br>
             ${date.toLocaleTimeString("en-GB")}

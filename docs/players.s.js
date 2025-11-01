@@ -1,7 +1,7 @@
 import"./chunk-FJBZMROU.js";import{E as f,H as m,K as p,L as u,M as g}from"./chunk-RDGRUNCC.js";f(g);var y=u(),$;p(m(y,"users"),t=>{$=t.val()});p(m(y,"leaderboard"),t=>{h.innerHTML="";let a=t.val(),e={};for(let[l,d]of Object.entries(a))for(let[s,r]of Object.entries(d))e[s]||(e[s]={}),e[s][l]=r;for(let[l,d]of Object.entries(e)){let s="";for(let[r,o]of Object.entries(d)){let c=[];for(let n=0;n<o.stops.length;n++)c.push(i(o.stops[n])),o.buses[n]&&c.push(o.buses[n]);let b=new Date(o.time);s+=`
       <tr>
         <td>
-          <span onclick="startgame('${r}')">        
+          <span onclick="startgame('${r.replace(/[<>]/g,"")}')">        
             ${i(r.split(" \u2192 ")[0])} \u2192 ${i(r.split(" \u2192 ")[1])}
           </span><br>
           <details>

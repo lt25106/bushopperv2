@@ -5,7 +5,7 @@ import"./chunk-FJBZMROU.js";import{E as b,H as c,K as m,L as f,M as g}from"./chu
             ${i(t.route.split(" \u2192 ")[0])} \u2192 ${i(t.route.split(" \u2192 ")[1])}
           </span><br>
           <details>
-            <summary>${$[t.uid].name}</summary>
+            <summary>${$[t.uid].name.replace(/[<>]/g,"")}</summary>
             ${(t.distance/1e3).toFixed(1)}km<br>
             ${p.toLocaleDateString("en-GB")}<br>
             ${p.toLocaleTimeString("en-GB")}
