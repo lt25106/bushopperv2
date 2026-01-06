@@ -6,6 +6,7 @@
   font-display: swap;
 }
 
+body#how > ol > li > button,
 body,
 body#index > button,
 body#index > dialog,
@@ -16,6 +17,8 @@ body#game > div#popup > button {
   border: none;
 }
 
+body#how > ol > li,
+body#how > ol > li > button,
 body#index > nav,
 body#index > button,
 body#index > dialog > button,
@@ -29,6 +32,7 @@ body#game > div#popup > button {
   font-size: 1.75rem;
 }
 
+body#how > ol > li > button,
 body > input[placeholder="🔍"],
 body#index button,
 body#index > dialog > span > input,
@@ -66,6 +70,7 @@ body#game > div#popup > button {
   display: none;
 }
 
+body#how > ol > li > button,
 body#index > button,
 body#index > dialog > button,
 body#game > div#popup > span button,
@@ -180,6 +185,7 @@ body#index > dialog {
 }
 body#index > nav {
   margin-bottom: calc(50vh - 6rem);
+  transform: translateX(-32px);
 }
 
 img[src="bushopper.svg"] {
@@ -234,4 +240,8 @@ body#index > svg > circle#nospin {
   to {
     transform: rotate(360deg);
   }
+}
+
+img[src="marker.svg"] {
+  height: 2rem;
 }
